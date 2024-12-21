@@ -1,0 +1,197 @@
+definitions:
+  email.RequestUser:
+    properties:
+      created_at:
+        type: string
+      created_by:
+        type: integer
+      email:
+        type: string
+      first_name:
+        type: string
+      image:
+        type: string
+      last_name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      request_id:
+        type: string
+      updated_at:
+        type: string
+      updated_by:
+        type: integer
+      username:
+        type: string
+    required:
+    - email
+    - first_name
+    - password
+    - request_id
+    - username
+    type: object
+  email.RequestUserLogin:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  email.ResponseUsers:
+    properties:
+      email:
+        example: email
+        type: string
+      first_name:
+        example: akhmad
+        type: string
+      image:
+        example: https:://
+        type: string
+      last_name:
+        example: zul
+        type: string
+      password:
+        example: password
+        type: string
+      phone:
+        example: "+62"
+        type: string
+      username:
+        example: username
+        type: string
+    type: object
+  entity.Login:
+    properties:
+      refreshToken:
+        type: string
+      token:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: This is a  be_test_linkque API Documentation.
+  title: be_test_linkque API
+  version: "1.0"
+paths:
+  /users:
+    get:
+      description: Get all clienusersts
+      parameters:
+      - description: users?per_page=2&page=1
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/email.ResponseUsers'
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      summary: Get users
+      tags:
+      - Users
+  /users/{id}:
+    put:
+      consumes:
+      - application/json
+      description: This enpoint is used to update user.
+      parameters:
+      - description: 621b6b4fb77e31da1435bb60
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Consumer client
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/email.RequestUserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/email.ResponseUsers'
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      summary: Update user.
+      tags:
+      - Users
+  /users/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: This enpoint is used to login service .
+      parameters:
+      - description: register users
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/email.RequestUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Login'
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      summary: Login.
+      tags:
+      - Users
+  /users/registration:
+    post:
+      consumes:
+      - application/json
+      description: This enpoint is used to register new users.
+      parameters:
+      - description: register users
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/email.RequestUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/email.ResponseUsers'
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+      summary: Create User.
+      tags:
+      - Users
+securityDefinitions:
+  jwt:
+    type: basic
+swagger: "2.0"

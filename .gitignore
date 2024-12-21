@@ -1,0 +1,34 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the 'go coverage' tool
+*.out
+
+# Ignore the vendor directory
+vendor/
+
+# Logs
+*.log
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Dependency directories
+node_modules/
+
+# Local config files
+*.env
+*.local
+config.local.yml
+
+# Ignore build artifacts
+/build/
