@@ -83,7 +83,17 @@ func mapInputToStruct(input *Indentify) (*entity.User, error) {
 	for i, part := range parts {
 		if _, err := strconv.Atoi(part); err == nil {
 			age = part
-			cityParts = parts[i+1:]
+
+			// Check if the next part is TAHUN, THN, or TH and skip it
+			if i+1 < len(parts) {
+				nextPart := strings.ToUpper(parts[i+1])
+				if nextPart == "TAHUN" || nextPart == "THN" || nextPart == "TH" {
+					cityParts = parts[i+2:]
+				} else {
+					cityParts = parts[i+1:]
+				}
+			}
+
 			break
 		}
 		nameParts = append(nameParts, part)
